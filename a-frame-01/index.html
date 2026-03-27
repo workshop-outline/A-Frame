@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  
+  <head>
+    
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  
+  <script src="https://unpkg.com/aframe-environment-component"></script>
+	  	  
+	
+   
+  </head>
+  
+  <body>
+    
+    
+<a-scene>
+		 
+  <!-- SHAPES -->
+
+
+<a-box position="-80 2 -100" rotation="45 45 0" scale="140 40 80" material="color: #4CC3D9; border:solid 30px"></a-box>
+          
+<a-sphere position="0 50 0" radius="30" color="#EF2D5E"></a-sphere>
+
+<a-cylinder position="1 0.75 -3" radius="2" height="100" color="#FFC65D"></a-cylinder>
+    
+<a-plane position="80 10 -100" rotation="0 360 -70" width="100" height="80" color="#e07422"></a-plane>
+    
+<a-entity geometry="primitive: dodecahedron; radius: 20" position="20 2 -40"></a-entity>
+  
+<!-- adjusting your light -->
+
+<a-entity light="type: ambient; intensity: 0.5;"></a-entity>
+  
+<a-entity light="type: directional;
+                   castShadow: true;
+                   intensity: 0.4;
+                   shadowCameraVisible: false;"
+            position="-5 3 1.5"></a-entity>
+
+
+    <!-- How to create different skys -->
+
+  
+  <a-sky src="#sky"></a-sky>
+  
+  
+
+  <!-- Using the asset management system. -->
+  
+<a-image src="#satellite" width="3.6" height="2.4" position="5 2 5" scale="4 4 4"></a-image>
+
+     
+<a-assets>
+  
+  <!-- YOUR SKY -->
+
+  
+<img id="sky" src="https://cdn.glitch.global/4c8bdd66-f750-4577-bd3c-ca0bac890857/Robot.png?v=1730365032922">
+
+<img id="satellite" src="https://cdn.glitch.global/4c8bdd66-f750-4577-bd3c-ca0bac890857/Robot.png?v=1730365032922">
+
+
+</a-assets>
+      
+      
+<a-camera position="0 3.8 60"></a-camera>
+
+
+    </a-scene>
+      
+  </body>
+</html>
