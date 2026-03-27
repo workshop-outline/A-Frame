@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MA3120–workshop-week-4</title>
+  
+<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>   
+
+    </head>
+  
+  <body>
+    
+ <a-scene>
+      
+  <a-box color="#FFF" width="4" height="4" depth="4"
+       position="300 100 0" rotation="0 0 45" scale="8 8 8"
+       src="#boxTexture">
+  
+  <a-animation attribute="position" to="-300 100 0" direction="alternate" dur="7000"
+    repeat="indefinite"></a-animation>
+  
+  </a-box>     
+      
+<a-cone src="#phi-length" height="80" radius-top="25" position="0 10 0">
+      
+<a-animation attribute="position" to="0 280 0" direction="alternate" dur="5000"
+      repeat="indefinite"></a-animation>
+  
+      </a-cone>
+
+<a-light type="ambient" color="#87CEEB"></a-light>
+      
+
+<a-sky src="#skyTexture"></a-sky>
+        
+
+<a-camera ook-controls wasd-controls="acceleration: 450" w position="80 2 -450" rotation="0 -200 0">
+      
+  </a-camera>
+      
+      
+<a-assets>
+    
+    <img id="boxTexture" src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/illustration/758px-Canestra_di_frutta_(Caravaggio).jpg">
+    
+    <img id="phi-length" src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/noise/perlin-512.png">
+
+    <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+        
+    
+</a-assets>
+      
+      </a-scene>
+
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+  
+  <head>
+    
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component"></script>
+	  
+	</head>
+  
+  
+  
+  <body>
+    
+    
+  <a-scene environment="preset: checkerboard" physics="debug: true; gravity: 0.8; restitution:0.7">
+		 
+    	  <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+    
+      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" animation="property: position; to: 180 90 360; loop: true; dur: 10000"></a-sphere>
+      
+    <a-sphere position="-19 20 -120" radius="10" color="#EF2D5E" animation="property: position; to: 180 90 360; loop: true; dur: 10000"></a-sphere>
+
+    
+      <a-cylinder position="1 0.75 -3" radius="2" height="1.5" color="#FFC65D"></a-cylinder>
+    
+      <a-plane position="10 1 -4" rotation="0 360 0" width="20" height="20" color="#e07422" animation="property: rotation; to: 0 -360 0; loop: true; dur: 10000"></a-plane>
+      <a-plane position="10 1 -4" rotation="0 90 180" width="10" height="20" color="#15e854" animation="property: rotation; to: -90 -180 0; loop: true; dur: 10000"></a-plane>
+
+      <a-sky color="#ECECEC" src="#myimage"></a-sky>
+
+      
+      
+      <a-entity id="world"></a-entity>
+	  
+    <a-scene environment="preset: checkerboard" physics="debug: true; gravity: 0.8; restitution:0.7">
+		 
+      </a-scene>
+      
+      
+  <a-assets>
+    
+    <video id="penguin-sledding" autoplay loop="true" src="https://cdn.glitch.global/f7c2ec85-2bd2-4eb6-9ce3-92f6b1beddff/city.mp4?v=1666270092680"></video>
+    
+
+      </a-assets>
+
+  <!-- Using the asset management system. -->
+  <a-video src="#penguin-sledding" width="60" height="34" position="0 0 -60"></a-video>
+      
+
+
+  <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
+     
+          <a-camera position="0 3.8 20"></a-camera>
+      
+    </a-scene>
+  </body>
+</html>

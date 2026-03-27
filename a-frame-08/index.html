@@ -1,0 +1,155 @@
+
+<html>
+
+<head>
+
+
+
+</head>
+
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+
+	  <script src="https://unpkg.com/aframe-environment-component"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe-physics-system/4.0.1/aframe-physics-system.min.js"></script>
+
+	  
+	 
+  
+  <body>
+      
+      <a-entity id="world"></a-entity>
+    
+
+	  
+    <a-scene environment="preset:yavapai" physics="gravity: -9.8; static-body">
+      
+      
+      
+      
+      
+      
+		 
+		  <a-box position="-1 5.5 -30" height="100" rotation="360 -45 360" color="#4CC3D9" animation="property: rotation; to: 0 -360 0; loop: true; dur: 10000" dynamic-body></a-box>
+      
+      <a-sphere position="-19 20 -120" radius="10" color="#EF2D5E" animation="property: position; to: 180 90 360; loop: true; dur: 10000" dynamic-body></a-sphere>
+      
+      
+      <a-cylinder position="-10 10 -3" radius="2" height="10.5" color="#FFC65D" animation="property: rotation; to: 360 -360 360; loop: true; dur: 10000" static-body></a-cylinder>
+      
+      <a-plane position="0 4 4" rotation="-90 0 0" width="40" height="40" color="#7BC8A4" static-body></a-plane>
+
+      
+      <a-sky color="#ECECEC"></a-sky>
+      
+     
+      
+      <a-assets>
+        
+        <a-mixin id="text" text="align: center; width: 500; value: 
+                                 
+                                 
+How beautiful the universe
+What little we can see
+The shimmering stars
+The silver moon
+The timeless melody.
+
+Are we goldfish in a bowl
+Doomed eternally
+To swim around our little world
+And think it is the sea?
+And that we are the masters?”
+                
+― Bernie Morris, Verse for Ages">
+        
+        </a-mixin>
+        
+        
+      </a-assets>
+      
+      
+      
+      
+      
+      
+<a-text mixin="text" position="30 45 -90" wrap-count="10" animation="property: rotation; to: 360 -360 360; loop: true; dur: 10000">
+      
+      </a-text>
+      
+    
+      
+      
+    
+      
+      <a-assets>
+      
+   
+    
+      
+      <video id="penguin-sledding" controls autoplay loop="true" src="https://cdn.glitch.global/2707c624-2c44-4ff3-a665-ef7bec0fd451/integral_over_the_body.mp4?v=1700235401765"></video>
+  </a-assets>
+      
+      
+ <a-entity id="river" geometry="primitive: plane" material="color: blue"
+          position="-10 0 0" sound="src: url(https://cdn.glitch.global/61191102-5a12-4b04-aef7-2416adef1eb8/584903__kangaroovindaloo__magpie.wav?v=1677713459869); autoplay: true"></a-entity>
+      
+    <a-entity id="elmo" geometry="primitive: box" material="src: elmo.png"
+          sound="src: url(https://cdn.glitch.global/61191102-5a12-4b04-aef7-2416adef1eb8/584903__kangaroovindaloo__magpie.wav?v=1677713459869); on: click loop"></a-entity>
+      
+      
+        <a-entity cursor position="0 0 -5"></a-entity>
+
+  <!-- Using the asset management system. -->
+  <a-video src="https://cdn.glitch.global/2707c624-2c44-4ff3-a665-ef7bec0fd451/integral_over_the_body.mp4?v=1700235401765" width="50" height="24" position="-45 15 -20"></a-video>
+
+  <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
+     
+   
+      <a-camera id="camera" position="0 1.6 0"></a-camera>
+
+
+
+  <script>
+    let cameraEl = document.querySelector('#camera');
+    let angle = 0; // starting angle
+    let radius = 60; // set a large radius for a huge circular path
+    let heightAmplitude = 40; // height variation to move up and down
+
+    function animateCamera() {
+      // Calculate new X, Y, Z positions based on angle for a circular path
+      let x = radius * Math.cos(angle);         // Circular horizontal movement
+      let z = radius * Math.sin(angle);
+      let y = heightAmplitude * Math.sin(angle / 2) + 1.6; // Smooth up and down path
+
+      // Update camera position with smooth animation
+      cameraEl.setAttribute('animation', `property: position; to: ${x} ${y} ${z}; dur: 500; easing: linear`);
+      
+        // Update camera rotation to continuously rotate while moving
+      cameraEl.setAttribute('animation__rotation', `property: rotation; to: 0 ${angle * (180 / Math.PI)} 0; dur: 500; easing: linear`);
+      
+      
+    
+      
+      // Increment angle for next position; smaller steps create smoother curves
+      angle += 0.05;
+    }
+
+    // Smoothly move camera in a circular ring shape every 50 milliseconds
+    setInterval(animateCamera, 50);
+  </script>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+    </a-scene>
+    
+  </body>
+</html>

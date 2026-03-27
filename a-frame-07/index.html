@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Simple Room and Corridor</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+    <a-scene physics="gravity: 0 -9.8 0">
+
+      <a-assets>
+        <img id="stoneTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+      </a-assets>
+
+      <!-- Camera -->
+      <a-entity position="0 0.8 4" movement-controls="speed: 0.15" kinematic-body>
+        <a-camera></a-camera>
+      </a-entity>
+
+      <!-- Very large ground -->
+      <a-plane
+        position="0 -0.05 -9"
+        rotation="-90 0 0"
+        width="1000"
+        height="1000"
+        src="#stoneTexture"
+        repeat="200 200"
+        static-body>
+      </a-plane>
+
+      <!-- Room 1 floor and ceiling -->
+      <a-box position="0 0 -4" width="10" height="0.1" depth="6" src="#stoneTexture" repeat="3 2" static-body></a-box>
+      <a-box position="0 6 -4" width="10" height="0.1" depth="6" color="#d9eaff" static-body></a-box>
+
+      <!-- Room 1 walls -->
+      <a-box position="-5 3 -4" width="0.1" height="6" depth="6" color="#cfe8ff" static-body></a-box>
+      <a-box position="5 3 -4" width="0.1" height="6" depth="6" color="#cfe8ff" static-body></a-box>
+
+      <!-- Back wall of Room 1 with opening for corridor -->
+      <a-box position="-3.5 3 -7" width="3" height="6" depth="0.1" color="#cfe8ff" static-body></a-box>
+      <a-box position="3.5 3 -7" width="3" height="6" depth="0.1" color="#cfe8ff" static-body></a-box>
+      <a-box position="0 5.2 -7" width="4" height="1.6" depth="0.1" color="#cfe8ff" static-body></a-box>
+
+      <!-- Corridor -->
+      <a-box position="0 0 -9" width="4" height="0.1" depth="4" src="#stoneTexture" repeat="2 2" static-body></a-box>
+      <a-box position="0 6 -9" width="4" height="0.1" depth="4" color="#d9eaff" static-body></a-box>
+      <a-box position="-2 3 -9" width="0.1" height="6" depth="4" color="#cfe8ff" static-body></a-box>
+      <a-box position="2 3 -9" width="0.1" height="6" depth="4" color="#cfe8ff" static-body></a-box>
+
+      <!-- Room 2 floor and ceiling -->
+      <a-box position="0 0 -14" width="10" height="0.1" depth="6" src="#stoneTexture" repeat="3 2" static-body></a-box>
+      <a-box position="0 6 -14" width="10" height="0.1" depth="6" color="#d9eaff" static-body></a-box>
+
+      <!-- Room 2 walls -->
+      <a-box position="-5 3 -14" width="0.1" height="6" depth="6" color="#cfe8ff" static-body></a-box>
+      <a-box position="5 3 -14" width="0.1" height="6" depth="6" color="#cfe8ff" static-body></a-box>
+      <a-box position="0 3 -17" width="10" height="6" depth="0.1" color="#cfe8ff" static-body></a-box>
+
+    </a-scene>
+  </body>
+</html>
