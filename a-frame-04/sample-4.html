@@ -1,0 +1,76 @@
+
+<html>
+
+<head>
+<a-entity text="font: mozillavr; value: Via stock font name."></a-entity>
+<a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: Via URL."></a-entity>
+<a-entity text="text: Hello World; font: ../fonts/DejaVu-sdf.fnt; fontImage: ../fonts/DejaVu-sdf.png"></a-entity>
+
+
+
+</head>
+
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+
+	  <script src="https://unpkg.com/aframe-environment-component"></script>
+	  
+	 
+  
+  <body>
+      
+      <a-entity id="world"></a-entity>
+    
+
+	  
+    <a-scene environment="preset:yavapai" physics="debug: true; gravity: 0.8; restitution:0.7">
+		 
+		  <a-box position="-1 5.5 -30" height="100" rotation="360 -45 360" color="#4CC3D9" animation="property: rotation; to: 0 -360 0; loop: true; dur: 10000"></a-box>
+      
+      <a-sphere position="-19 20 -120" radius="10" color="#EF2D5E" animation="property: position; to: 180 90 360; loop: true; dur: 10000"></a-sphere>
+      
+      <a-cylinder position="-10 10 -3" radius="2" height="10.5" color="#FFC65D" animation="property: rotation; to: 360 -360 360; loop: true; dur: 10000"></a-cylinder>
+      
+
+      
+      <a-sky color="#ECECEC"></a-sky>
+      
+     
+      
+      <a-assets>
+        
+        <a-mixin id="text" text="align: center; width: 500; value: How beautiful the universe
+What little we can see
+The shimmering stars
+The silver moon
+The timeless melody.
+
+Are we goldfish in a bowl
+Doomed eternally
+To swim around our little world
+And think it is the sea?
+And that we are the masters?”
+                
+― Bernie Morris, Verse for Ages">
+        
+        </a-mixin>
+      </a-assets>
+      
+      
+      
+      
+    <a-text mixin="text" position="30 45 -90" wrap-count="10" animation="property: rotation; to: 360 -360 360; loop: true; dur: 10000">
+      </a-text>
+      
+  
+    
+     
+      
+      
+      
+      <a-camera position="0 3.8 20"></a-camera>
+
+      
+    </a-scene>
+    
+  </body>
+</html>
