@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My A-Frame Experiment</title>
+
+  <!-- Loads the A-Frame library -->
+  <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+</head>
+
+<body>
+
+  <a-scene>
+
+    <!-- Surrounding background -->
+    <a-sky color="#DDE6EE"></a-sky>
+
+    <!-- Ground -->
+    <a-plane
+      position="0 0 -4"
+      rotation="-90 0 0"
+      width="20"
+      height="20"
+      color="#C8C8C8">
+    </a-plane>
+
+    <!-- Main cube -->
+    <a-box
+      position="0 1 -4"
+      color="#FFFFFF">
+    </a-box>
+
+    <!-- Simple outline so the cube edges are easy to recognise -->
+    <a-box
+      position="0 1 -4"
+      scale="1.03 1.03 1.03"
+      material="color: #222222; wireframe: true">
+    </a-box>
+
+  </a-scene>
+
+</body>
+
+</html>
