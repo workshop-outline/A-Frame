@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+  <script>
+    // FLOATING IMAGE CLOUD
+    AFRAME.registerComponent('image-cloud', {
+      init: function () {
+        const group = new THREE.Group();
+        this.el.setObject3D('cloud', group);
+
+        this.group = group;
+        this.sprites = [];
+
+        const loader = new THREE.TextureLoader();
+
+        // CHANGE YOUR IMAGE FILE HERE
+        loader.load('assets/rain-cloud.gif', (texture) => {
+          texture.colorSpace = THREE.SRGBColorSpace;
+
+          const material = new THREE.SpriteMaterial({
+            map: texture,
+            transparent: true,
+            depthWrite: false
+          });
+
+          const ratio =
+            texture.image.width / texture.image.height;
+
+          for (let i = 0; i < 100; i++) {
+            const sprite = new THREE.Sprite(material);
+
+            const size = 0.3 + Math.random() * 0.5;
+
+            sprite.scale.set(size * ratio, size, 1);
+
+            const x = (Math.random() - 0.5) * 7;
+            const y = (Math.random() - 0.5) * 4;
+            const z = (Math.random() - 0.5) * 5;
+
+            sprite.position.set(x, y, z);
+            group.add(sprite);
+
+            this.sprites.push({
+              sprite: sprite,
+              baseY: y,
+              phase: Math.random() * Math.PI * 2
+            });
+          }
+        });
+      },
+
+      tick: function (time, delta) {
+        this.group.rotation.y += delta * 0.00015;
+
+        this.group.rotation.x =
+          Math.sin(time * 0.0002) * 0.1;
+
+        for (const item of this.sprites) {
+          item.sprite.position.y =
+            item.baseY +
+            Math.sin(time * 0.001 + item.phase) * 0.15;
+        }
+      }
+    });
+
+
+    // DOTTED DEPTH FIELD
+    AFRAME.registerComponent('depth-dots', {
+      init: function () {
+        const group = new THREE.Group();
+        this.el.setObject3D('dots', group);
+
+        const geometry =
+          new THREE.SphereGeometry(0.2, 6, 6);
+
+        const material = new THREE.MeshBasicMaterial({
+          color: 0x687B88,
+          transparent: true,
+          opacity: 0.4
+        });
+
+        for (let i = 0; i < 500; i++) {
+          const dot = new THREE.Mesh(geometry, material);
+
+          dot.position.set(
+            (Math.random() - 0.5) * 30,
+            (Math.random() - 0.5) * 20,
+            (Math.random() - 0.5) * 30
+          );
+
+          const s = 0.5 + Math.random() * 1.5;
+          dot.scale.set(s, s, s);
+
+          group.add(dot);
+        }
+
+        this.group = group;
+      },
+
+      tick: function (time) {
+        this.group.rotation.y = time * 0.00003;
+      }
+    });
+
+
+    // FULL 360-DEGREE SKY GRID
+    AFRAME.registerComponent('sky-grid', {
+      init: function () {
+        const group = new THREE.Group();
+        this.el.setObject3D('skyGrid', group);
+
+        const radius = 80;
+
+        // LINE THICKNESS
+        const thickness = 0.15;
+
+        const material = new THREE.MeshBasicMaterial({
+          color: 0x87959F,
+          transparent: true,
+          opacity: 0.55,
+          side: THREE.DoubleSide,
+          depthWrite: false
+        });
+
+        // Function to create a thick curved line
+        function addLine(points) {
+          const curve =
+            new THREE.CatmullRomCurve3(points, true);
+
+          const geometry = new THREE.TubeGeometry(
+            curve,
+            180,
+            thickness,
+            6,
+            true
+          );
+
+          const line = new THREE.Mesh(geometry, material);
+          group.add(line);
+        }
+
+        // Vertical curved lines around the entire sky
+        for (let i = 0; i < 12; i++) {
+          const angle = i * Math.PI / 12;
+          const points = [];
+
+          for (let j = 0; j < 120; j++) {
+            const t = j / 120 * Math.PI * 2;
+
+            points.push(new THREE.Vector3(
+              radius * Math.sin(t) * Math.cos(angle),
+              radius * Math.cos(t),
+              radius * Math.sin(t) * Math.sin(angle)
+            ));
+          }
+
+          addLine(points);
+        }
+
+        // Horizontal curved lines around the entire sky
+        for (let lat = -75; lat <= 75; lat += 15) {
+          const points = [];
+          const latitude = THREE.MathUtils.degToRad(lat);
+
+          for (let j = 0; j < 120; j++) {
+            const t = j / 120 * Math.PI * 2;
+
+            points.push(new THREE.Vector3(
+              radius * Math.cos(latitude) * Math.cos(t),
+              radius * Math.sin(latitude),
+              radius * Math.cos(latitude) * Math.sin(t)
+            ));
+          }
+
+          addLine(points);
+        }
+      }
+    });
+
+  </script>
+</head>
+
+<body>
+
+  <a-scene
+    background="color: #F2F4F5"
+    fog="type: exponential; color: #F2F4F5; density: 0.006">
+
+    <!-- LIGHT SKY -->
+    <a-sky color="#F2F4F5" radius="100"></a-sky>
+
+    <!-- FULL SPHERICAL GRID -->
+    <a-entity sky-grid></a-entity>
+
+    <!-- LIGHTING -->
+    <a-entity
+      light="type: ambient; color: #FFFFFF; intensity: 0.8">
+    </a-entity>
+
+    <!-- FLOATING DOTS -->
+    <a-entity
+      depth-dots
+      position="0 1.6 -8">
+    </a-entity>
+
+    <!-- YOUR FLOATING IMAGES -->
+    <a-entity
+      image-cloud
+      position="0 1.6 -6">
+    </a-entity>
+
+    <!-- CAMERA -->
+    <a-entity
+      camera
+      look-controls
+      wasd-controls
+      position="0 1.6 0">
+    </a-entity>
+
+  </a-scene>
+
+</body>
+</html>
